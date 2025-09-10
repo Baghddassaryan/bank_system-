@@ -1,6 +1,6 @@
-package Transactions.implementations;
+package transactions.impl;
 
-import Transactions.interfaces.Transaction;
+import transactions.Transaction;
 import enums.BankAccountType;
 import exceptions.*;
 import models.BankAccount;
@@ -8,18 +8,16 @@ import models.BankAccount;
 /**
  * Represents transactions for a bank account (Debit / Credit).
  */
-public class BankAccountTransaction implements Transaction {
+public class BankAccountTransactionImpl implements Transaction {
     private final BankAccount account;
 
-    public BankAccountTransaction(BankAccount account) {
+    public BankAccountTransactionImpl(BankAccount account) {
         this.account = account;
     }
 
     @Override
     public void deposit(double amount) throws BankTransactionException {
-        if (account.getBankAccountType() != BankAccountType.DEBIT) {
-            throw new BankTransactionException("Cannot deposit into a credit account.");
-        }
+
         if (amount <= 0) {
             throw new BankTransactionException("Deposit amount must be positive.");
         }
@@ -46,8 +44,16 @@ public class BankAccountTransaction implements Transaction {
     @Override
     public void transfer(Transaction toAccount, double amount)
             throws InsufficientFundsException, BankTransactionException {
+        if (toAccount == null) {
+            throw new IllegalArgumentException("Target account cannot be null.");
+        }
 
-        if (!(toAccount instanceof BankAccountTransaction targetAccount)) {
+        if (this == toAccount) {
+            throw new BankTransactionException("Cannot transfer to the same account.");
+        }
+
+
+        if (!(toAccount instanceof BankAccountTransactionImpl targetAccount)) {
             throw new BankTransactionException("Transfer allowed only between bank accounts.");
         }
 

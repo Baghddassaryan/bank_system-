@@ -1,17 +1,17 @@
-package Transactions.implementations;
+package transactions.impl;
 
-import Transactions.interfaces.Transaction;
 import enums.CardStatus;
 import exceptions.*;
 import models.CardAccount;
+import transactions.Transaction;
 
 /**
  * Represents transactions on a card account.
  */
-public class CardTransaction implements Transaction {
+public class CardTransactionImpl implements Transaction {
     private final CardAccount card;
 
-    public CardTransaction(CardAccount card) {
+    public CardTransactionImpl(CardAccount card) {
         this.card = card;
     }
 

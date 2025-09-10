@@ -1,4 +1,4 @@
-package Transactions.interfaces;
+package transactions;
 
 
 import exceptions.BankTransactionException;

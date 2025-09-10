@@ -1,4 +1,4 @@
-package Transactions.implementations;
+package transactions;
 
 import models.Appointment;
 

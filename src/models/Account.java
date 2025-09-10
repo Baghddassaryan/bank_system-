@@ -7,8 +7,8 @@ import enums.Currency;
  * Represents a basic account.
  */
 public class Account {
-    private String accountNumber; // must be 16 digits
-    private Currency currency;
+    private final String accountNumber; // must be 16 digits
+    private final Currency currency;
     private double balance;
 
     public Account(String accountNumber, Currency currency, double balance) {
@@ -23,4 +23,5 @@ public class Account {
     public String getAccountNumber() { return accountNumber; }
     public Currency getCurrency() { return currency; }
     public double getBalance() { return balance; }
+    public void setBalance(double balance) {this.balance = balance;}
 }
