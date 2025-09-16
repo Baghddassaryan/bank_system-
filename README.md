@@ -40,10 +40,12 @@ bank_system/
 │   ├── CardType.java
 │   ├── CardStatus.java
 │   ├── Currency.java
+│   ├── ServiceType.java
 │   └── BankAccountType.java
 │
 ├── models/
 │   ├── Address.java
+│   ├── Appointment.java
 │   ├── Account.java
 │   ├── CardAccount.java
 │   ├── BankAccount.java
@@ -53,11 +55,9 @@ bank_system/
 ├── transactions/
 │   ├── Transaction.java
 │   ├── CardTransaction.java
+│   ├── AppointmentManager.java
 │   └── BankAccountTransaction.java
 │
-├── appointments/
-│   ├── Appointment.java
-│   └── AppointmentManager.java
 │
 ├── exceptions/
 │   ├── InsufficientFundsException.java
