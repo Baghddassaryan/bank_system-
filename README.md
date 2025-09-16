@@ -1,77 +1,137 @@
-# 🏦 Simple Banking System  
+# 🏦 Simple Banking System
 
-This project is a **mini banking application** written in **Java**, simulating account management, cards, deposits, withdrawals, transfers, and appointment scheduling for bank services.  
-The project demonstrates **OOP concepts, custom exceptions, abstract classes, interfaces, and Java Collection APIs**.  
+A **mini banking application** built in **Java** that simulates account management, card operations, deposits, withdrawals, transfers, and appointment scheduling.
 
----
-
-## 📌 Features  
-
-- 👤 **CardHolder Management** (passport, name, address, accounts, and cards)  
-- 💳 **Card Accounts** (Visa, MasterCard, American Express)  
-- 🏦 **Bank Accounts** (Debit, Credit)  
-- 💰 **Transactions** (Deposit, Withdraw, Transfer)  
-- 🚫 **Custom Exceptions** (e.g., `InsufficientFundsException`, `BankTransactionException`)  
-- 📆 **Bank Visit Time Slots** (Appointment scheduling with priorities)  
+This project demonstrates concepts of **OOP, custom exceptions, abstract classes, interfaces, and Java collection APIs**.
 
 ---
 
-## ⚙️ Enums  
+## 📌 Features
 
-- `CardType` → `VISA`, `MASTERCARD`, `AMERICAN_EXPRESS`  
-- `CardStatus` → `ACTIVE`, `CLOSED`, `BLOCKED`  
-- `Currency` → `AMD`, `USD`, `RUB`  
-- `BankAccountType` → `DEBIT`, `CREDIT`  
+### 🔹 Core Banking
+- Manage **Bank Accounts** (Debit & Credit).
+- Manage **Bank Cards** (Visa, MasterCard, American Express).
+- Perform **Transactions**:
+    - Deposit
+    - Withdraw
+    - Transfer
 
----
+### 🔹 Card & Account Rules
+- Blocked cards cannot be used for transactions.
+- Debit accounts allow deposits.
+- Credit accounts allow withdrawals.
+- Balance and currency validation for transactions.
 
-## 🏗️ Models  
-
-- **Address** → `country, region, city, street, house`  
-- **Account** → `accountNumber (16 digits), currency, balance`  
-- **CardAccount** → `accountNumber (16 digits), cvv (3 digits), expirationDate, cardType, balance, status, currency`  
-- **BankAccount** → `accountNumber (16 digits), balance, currency, accountType`  
-- **CardHolder** → `passportNumber, fullName, address, cardList, bankAccount`  
-- **Bank** → `bankName, address, cardHolderList`  
-- **Appointment** → `customerName, serviceType, preferredTime, priority`  
-
----
-
-## 🚨 Exceptions  
-
-- `InsufficientFundsException` – thrown when account/card has not enough funds.  
-- `BankTransactionException` – thrown for invalid operations (e.g., deposit to credit account).  
+### 🔹 Appointment System
+- Schedule customer appointments for:
+    - Account Opening
+    - Loan Consultation
+    - Card Issue
+- Priority-based appointment handling.
 
 ---
 
-## 🔄 Transactions  
+## 📂 Project Structure
 
-### Interface: `Transaction`  
-- `deposit()`  
-- `withdraw()`  
-- `transfer()`  
-
-### `CardTransaction`  
-- Deposit → Not allowed if **card is blocked**  
-- Withdraw → Not allowed if **card is blocked** or **insufficient funds**  
-- Transfer → Only if **card is active** and funds are sufficient  
-- BlockCard → Change card status  
-
-### `BankAccountTransaction`  
-- Deposit → Only if account type is **DEBIT**  
-- Withdraw → Only if account type is **CREDIT** and balance is sufficient  
-- Transfer → From **DEBIT to CREDIT** with balance check  
+```bash
+bank_system/
+│
+├── enums/
+│   ├── CardType.java
+│   ├── CardStatus.java
+│   ├── Currency.java
+│   └── BankAccountType.java
+│
+├── models/
+│   ├── Address.java
+│   ├── Account.java
+│   ├── CardAccount.java
+│   ├── BankAccount.java
+│   ├── CardHolder.java
+│   └── Bank.java
+│
+├── transactions/
+│   ├── Transaction.java
+│   ├── CardTransaction.java
+│   └── BankAccountTransaction.java
+│
+├── appointments/
+│   ├── Appointment.java
+│   └── AppointmentManager.java
+│
+├── exceptions/
+│   ├── InsufficientFundsException.java
+│   └── BankTransactionException.java
+│
+├── Main.java
+└── README.md
+```
 
 ---
 
-## 📅 Appointment System  
+## ⚙️ Installation & Usage
 
-- `AppointmentManager`  
-  - `viewAllAppointments()` → Returns all scheduled appointments  
-  - `getNextAppointment()` → Returns highest priority appointment  
-  - `scheduleAppointment()` → Adds new appointment to the queue  
+### 1. Clone the Repository
+```bash
+git clone https://github.com/your-username/bank_system.git
+cd bank_system
+```
+
+### 2. Compile the Project
+```bash
+javac Main.java
+```
+
+### 3. Run the Application
+```bash
+java Main
+```
 
 ---
 
-## 📂 Project Structure  
+## 📖 Example Usage
+
+```java
+Address address = new Address("Armenia", "Yerevan", "Kentron", "Tumanyan", "25A");
+CardAccount card = new CardAccount("1234567890123456", "123", "12/28", 
+                                   CardType.VISA, 1000.0, CardStatus.ACTIVE, Currency.USD);
+
+CardTransaction transaction = new CardTransaction();
+transaction.deposit(card, 500.0);
+transaction.withdraw(card, 200.0);
+
+System.out.println("Balance: " + card.getBalance());
+```
+
+---
+
+## 🛑 Custom Exceptions
+
+- `InsufficientFundsException` → Thrown when withdrawal/transfer exceeds balance.
+- `BankTransactionException` → General exception for invalid operations.
+
+---
+
+## 🎯 Concepts Implemented
+
+- ✅ **OOP** (Encapsulation, Inheritance, Polymorphism, Abstraction)
+- ✅ **Custom Exceptions** for business rules
+- ✅ **Abstract Classes & Interfaces** (`Transaction`)
+- ✅ **Java Collections API** for managing card lists, accounts, and appointments
+
+---
+
+## 📅 Future Improvements
+
+- Add **database integration** for persistent storage.
+- Implement **user authentication system**.
+- Add **GUI / Web interface**.
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License** – free to use and modify.
+
+---
 
